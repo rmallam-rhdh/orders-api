@@ -17,6 +17,10 @@ spec:
     args:
     - 99d
     tty: true
+    envFrom:
+    - secretRef:
+        name: sonarqube-token
+        optional: true
     resources:
       requests:
         cpu: 200m
@@ -33,7 +37,7 @@ spec:
   environment {
     APP_NAME          = 'orders-api'
     SONAR_HOST_URL    = 'http://sonarqube.sonarqube.svc:9000'
-    SONAR_PROJECT_KEY = 'demo-plugin-kitchen-sink'
+    SONAR_PROJECT_KEY = 'orders-api'
     TARGET_NAMESPACE  = 'demo-dev'
   }
 
