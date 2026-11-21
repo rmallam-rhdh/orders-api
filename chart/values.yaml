@@ -27,7 +27,7 @@ idp-service-chart:
       printf '{"status":"ok","app":"orders-api","appId":"APP-1042"}\n' > /tmp/web/health
       printf '{"service":"orders-api","system":"mallamsbank","appId":"APP-1042","message":"ok"}\n' > /tmp/web/api/index.html
       printf '<!doctype html><html><body style="font-family:sans-serif;margin:2rem"><h1>orders-api (APP-1042)</h1><p>Enterprise Quarkus 3 / Java 21 microservice with Ambient Mesh, OpenAPI, and Command Centre telemetry</p><p>Deployed via IDP Shared Base Chart (idp-service-chart:1.0.0) + Argo CD</p></body></html>\n' > /tmp/web/index.html
-      exec jwebserver -b 0.0.0.0 -p 8080 -d /tmp/web
+      exec java -m jdk.httpserver -b 0.0.0.0 -p 8080 -d /tmp/web
 
   service:
     port: 8080
