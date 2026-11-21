@@ -1,0 +1,3 @@
+site_name: 'orders-api'
+nav:
+  - Home: index.md
