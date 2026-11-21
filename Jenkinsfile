@@ -44,7 +44,7 @@ spec:
   stages {
     stage('Unit Tests') {
       steps {
-        sh 'java -version && mvn -q -Dmaven.repo.local=/tmp/.m2 -DskipITs test'
+        sh 'java -version && mvn -q -Dmaven.repo.local=/tmp/.m2 -Dsonar.userHome=/tmp/.sonar -DskipITs test'
       }
     }
 
@@ -57,7 +57,7 @@ spec:
               echo "SONAR_TOKEN unset — skip scanner (add a Jenkins credential if you want a live gate)"
               exit 0
             fi
-            mvn -q -Dmaven.repo.local=/tmp/.m2 org.sonarsource.scanner.maven:sonar-maven-plugin:3.11.0.3922:sonar -Dsonar.token="${SONAR_TOKEN}" \
+            mvn -q -Dmaven.repo.local=/tmp/.m2 -Dsonar.userHome=/tmp/.sonar org.sonarsource.scanner.maven:sonar-maven-plugin:3.11.0.3922:sonar -Dsonar.token="${SONAR_TOKEN}" \
               -Dsonar.host.url="${SONAR_HOST_URL}" \
               -Dsonar.projectKey="${SONAR_PROJECT_KEY}" \
               -Dsonar.login="${SONAR_TOKEN}"
