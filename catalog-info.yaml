@@ -15,7 +15,7 @@ metadata:
     - devspaces
   labels:
     platform.idp/app-id: "APP-1042"
-    servicenow.com/support-group: 
+    servicenow.com/support-group: "developers"
   annotations:
     # 1. Enterprise Application Identity & Source Control
     platform.idp/app-id: "APP-1042"
@@ -58,7 +58,7 @@ metadata:
     pagerduty.com/service-id: "P123456"
     jira/project-key: "SCRUM"
     servicenow.com/entity-id: "demo"
-    servicenow.com/support-group: "group:default/developers"
+    servicenow.com/support-group: "developers"
     servicenow.com/app-id: "APP-1042"
 
     # 8. OpenShift Dev Spaces (Pinned to GitOps Pre-Created User Namespace)
