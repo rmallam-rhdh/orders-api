@@ -1,0 +1,147 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: orders-api
+  title: "orders-api (APP-1042)"
+  description: "Enterprise Quarkus 3 / Java 21 microservice with Ambient Mesh, OpenAPI, and Command Centre telemetry [APPID: APP-1042]"
+  tags:
+    - quarkus
+    - java-21
+    - golden-path
+    - command-centre
+    - service-mesh
+    - gitops
+    - devspaces
+  labels:
+    platform.idp/app-id: "APP-1042"
+    servicenow.com/support-group: "developers"
+  annotations:
+    # 1. Enterprise Application Identity & Source Control
+    platform.idp/app-id: "APP-1042"
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/source-location: url:https://github.com/rmallam-rhdh/orders-api/tree/main/
+    backstage.io/view-url: https://github.com/rmallam-rhdh/orders-api
+    backstage.io/edit-url: https://github.com/rmallam-rhdh/orders-api/edit/main/catalog-info.yaml
+    github.com/project-slug: rmallam-rhdh/orders-api
+
+    # 2. Multi-Cluster Argo CD (Overview Top-Right Bento + CI/CD Tab — nonprod-argo & prod-argo)
+    argocd/app-selector: "backstage-name=orders-api"
+    argocd/app-namespace: openshift-gitops
+
+    # 3. Day-2 Self-Service Promotion Metadata (consumed by promote-service-to-production)
+    platform.idp/gitops-repo: "rmallam-rhdh/rhdh-platform-gitops"
+    platform.idp/gitops-prod-branch: main
+    platform.idp/gitops-prod-values-path: "environments/prod/orders-api/values.yaml"
+
+    # 4. CI, Code Quality & Security Gates (Overview Bento + CI/CD + Quality & Security Tabs)
+    jenkins.io/job-full-name: "demo/orders-api"
+    sonarqube.org/project-key: "orders-api"
+    snyk.io/org-id: stub-org
+    snyk.io/org-name: stub-org
+    snyk.io/project-ids: stub
+    jfrog-artifactory/image-name: "plugin-kitchen-sink"
+
+    # 5. HashiCorp Vault Enterprise Namespace Dynamic Plugin (Overview Bento + Quality & Security Tab)
+    vault.io/namespace: "payments/nonprod"
+    vault.io/secrets-path: "ledger-service"
+    vault.io/allowed-principals: "group:default/developers,group:default/developers,group:default/platform-team"
+
+    # 6. Multi-Cluster Kubernetes & Service Mesh Runtime (Runtime Tab: Topology + Multi-Cluster K8s + Kiali)
+    # NOTE: backstage.io/kubernetes-namespace is intentionally omitted so RHDH discovers resources
+    # across all clusters and differently named environment namespaces (EDEV, NPRD, PROD) by label selector.
+    backstage.io/kubernetes-id: "orders-api"
+    kiali.io/namespace: "demo-dev"
+
+    # 7. Operations, Alerting & ITSM (Overview Bento + Operations Tab: Dynatrace + PagerDuty + Jira + ServiceNow)
+    dynatrace.com/dynatrace-entity-id: "SERVICE-39720C1E0047A5C0"
+    pagerduty.com/service-id: "P123456"
+    jira/project-key: "SCRUM"
+    servicenow.com/entity-id: "demo"
+    servicenow.com/support-group: "developers"
+    servicenow.com/app-id: "APP-1042"
+
+    # 8. OpenShift Dev Spaces (Pinned to GitOps Pre-Created User Namespace)
+    acme.io/devfile-path: devfile.yaml
+    acme.io/helm-chart: chart
+    acme.io/mesh: ambient
+    acme.io/mesh-ingress: gateway
+    acme.io/devspaces-namespace: "bob-devspaces-q9m4x"
+    acme.io/devspaces-url: "https://devspaces.apps.rosa.rosa-rwx5g.f8y9.p3.openshiftapps.com"
+    acme.io/devspaces-factory-url: "https://devspaces.apps.rosa.rosa-rwx5g.f8y9.p3.openshiftapps.com#https://github.com/rmallam-rhdh/orders-api?devfilePath=devfile.yaml&namespace=bob-devspaces-q9m4x&policies.create=peruser"
+  links:
+    - title: "Open / Reuse Dev Spaces Workspace (IDE: bob-devspaces-q9m4x)"
+      url: https://devspaces.apps.rosa.rosa-rwx5g.f8y9.p3.openshiftapps.com/dashboard/#/ide/bob-devspaces-q9m4x/orders-api
+      icon: dashboard
+      type: devspaces
+    - title: "Open in Dev Spaces Factory (Reuses Workspace if Present — policies.create=peruser)"
+      url: https://devspaces.apps.rosa.rosa-rwx5g.f8y9.p3.openshiftapps.com#https://github.com/rmallam-rhdh/orders-api?devfilePath=devfile.yaml&namespace=bob-devspaces-q9m4x&policies.create=peruser
+      icon: code
+      type: devspaces
+    - title: "Start Day-2 Feature Branch & Dev Spaces Workspace (RHDH Template)"
+      url: https://backstage-developer-hub-rhdh.apps.rosa.rosa-rwx5g.f8y9.p3.openshiftapps.com/create/templates/default/acme-start-feature-devspaces
+      icon: scaffolder
+      type: devspaces
+    - title: Helm Chart & Ambient Mesh Policy (/chart)
+      url: https://github.com/rmallam-rhdh/orders-api/tree/main/chart
+      icon: github
+      type: gitops
+    - title: Jenkinsfile CI/CD Pipeline (Test -> Sonar -> Helm)
+      url: https://github.com/rmallam-rhdh/orders-api/blob/main/Jenkinsfile
+      icon: github
+      type: cicd
+    - title: JFrog Artifactory — Container Repository
+      url: http://saas-stubs.saas-stubs.svc:8080/ui/repos/tree/General/docker-local/orders-api
+      icon: box
+      type: artifact-repository
+    - title: "Vault Enterprise UI — Non-Prod (payments/nonprod)"
+      url: https://vault-ui.corp.example.com/ui/vault/secrets/kv/kv/list/ledger-service?namespace=payments%2Fnonprod
+      icon: lock
+      type: secrets
+    - title: Vault Enterprise UI — Prod (payments/prod)
+      url: https://vault-ui.corp.example.com/ui/vault/secrets/kv/kv/list/ledger-service?namespace=payments%2Fprod
+      icon: lock
+      type: secrets
+    - title: GitOps Environments & Dev Spaces Namespace Registry
+      url: https://github.com/rmallam-rhdh/rhdh-platform-gitops/blob/main/charts/devspaces-user-namespaces/values.yaml
+      icon: github
+      type: gitops
+spec:
+  type: service
+  lifecycle: production
+  owner: "group:default/developers"
+  system: "mallamsbank"
+  providesApis:
+    - orders-api-api
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: orders-api-api
+  description: "OpenAPI 3.0 specification for orders-api [APPID: APP-1042]"
+  tags:
+    - quarkus
+    - openapi
+    - rest
+  labels:
+    platform.idp/app-id: "APP-1042"
+spec:
+  type: openapi
+  lifecycle: production
+  owner: "group:default/developers"
+  system: "mallamsbank"
+  definition:
+    $text: ./openapi.yaml
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: mallamsbank
+  description: "Enterprise Golden Path Platform System [APPID: APP-1042]"
+  tags:
+    - golden-path
+    - command-centre
+  labels:
+    platform.idp/app-id: "APP-1042"
+spec:
+  owner: "group:default/developers"
